@@ -40,7 +40,7 @@ Run the agent from the console:
 python src/main.py
 
 # Technologies Used
-Python 3.12\n
+Python 3.12
 LangChain
 OpenAI gpt-4o-mini
 Requests library
