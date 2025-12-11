@@ -1,8 +1,8 @@
 class ToolInputError(Exception):
-    """Raised when the user provides invalid input to a tool."""
+    """Raised when a tool receives invalid or unsupported input."""
     pass
 
 
 class ToolExecutionError(Exception):
-    """Raised when a tool fails to execute properly."""
+    """Raised when a tool fails during execution (API errors, math errors, etc.)."""
     pass

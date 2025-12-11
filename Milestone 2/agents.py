@@ -2,6 +2,7 @@ from langchain_openai import ChatOpenAI
 from langchain.agents import initialize_agent, AgentType
 from tools import tools
 from memory import memory
+from prompts import SYSTEM_PROMPT       
 import os
 from dotenv import load_dotenv
 
@@ -19,8 +20,12 @@ def create_agent():
         llm=llm,
         agent=AgentType.ZERO_SHOT_REACT_DESCRIPTION,
         memory=memory,
-        verbose=True,                         # shows thought → action → observation
-        handle_parsing_errors=True            # avoids crashing on errors
+        verbose=True,
+        handle_parsing_errors=True,
+
+        
+        system_message=SYSTEM_PROMPT
+        
     )
 
     return agent
