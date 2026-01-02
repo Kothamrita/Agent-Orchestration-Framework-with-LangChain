@@ -1,48 +1,83 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>AI Workflow Automation</title>
-  <link rel="stylesheet" href="/static/style.css">
+    <meta charset="UTF-8">
+    <title>AI Workflow Automation</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
-
 <body>
+
+<div class="bg"></div>
 
 <div class="container">
 
-  <h1>AI Research • Summarize • Email Composer</h1>
+    <h1>✨ AI Workflow Orchestrator</h1>
+    <p class="subtitle">
+        Research → Summarize → Email — Automated.
+    </p>
 
-  <form method="post" action="/process">
+    <form id="taskForm">
+        <label>Enter Topic</label>
+        <input type="text" name="topic" placeholder="e.g., AI in Healthcare" required>
 
-    <label>Topic</label>
-    <input name="topic" placeholder="Enter topic..." required>
+        <label>Recipient Email</label>
+        <input type="email" name="recipient" placeholder="example@infosys.com" required>
 
-    <label>Recipient Name</label>
-    <input name="recipient" placeholder="Example: HR Manager" required>
+        <button type="submit">Run Workflow 🚀</button>
+    </form>
 
-    <button type="submit">Run Workflow</button>
+    <div id="loader" class="loader hidden"></div>
 
-  </form>
+    <div id="results" class="hidden">
 
-  {% if research %}
+        <div class="card">
+            <h3>📚 Research</h3>
+            <pre id="researchText"></pre>
+        </div>
 
-  <div class="card">
-    <h3>Research Output</h3>
-    <p>{{research}}</p>
-  </div>
+        <div class="card">
+            <h3>📝 Summary</h3>
+            <pre id="summaryText"></pre>
+        </div>
 
-  <div class="card">
-    <h3>Summary</h3>
-    <p>{{summary}}</p>
-  </div>
+        <div class="card">
+            <h3>📨 Email Draft</h3>
+            <pre id="emailText"></pre>
+        </div>
 
-  <div class="card">
-    <h3>Email Draft</h3>
-    <p>{{email}}</p>
-  </div>
-
-  {% endif %}
+    </div>
 
 </div>
+
+
+<script>
+const form = document.getElementById("taskForm");
+const loader = document.getElementById("loader");
+const results = document.getElementById("results");
+
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    loader.classList.remove("hidden");
+    results.classList.add("hidden");
+
+    const formData = new FormData(form);
+
+    const response = await fetch("/process", {
+        method: "POST",
+        body: formData
+    });
+
+    const data = await response.json();
+
+    document.getElementById("researchText").innerText = data.research;
+    document.getElementById("summaryText").innerText = data.summary;
+    document.getElementById("emailText").innerText = data.email;
+
+    loader.classList.add("hidden");
+    results.classList.remove("hidden");
+});
+</script>
 
 </body>
 </html>
