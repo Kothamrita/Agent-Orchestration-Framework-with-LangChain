@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Workflow Automation</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>AI Research • Summarize • Email Composer</h1>
+
+  <form method="post" action="/process">
+
+    <label>Topic</label>
+    <input name="topic" placeholder="Enter topic..." required>
+
+    <label>Recipient Name</label>
+    <input name="recipient" placeholder="Example: HR Manager" required>
+
+    <button type="submit">Run Workflow</button>
+
+  </form>
+
+  {% if research %}
+
+  <div class="card">
+    <h3>Research Output</h3>
+    <p>{{research}}</p>
+  </div>
+
+  <div class="card">
+    <h3>Summary</h3>
+    <p>{{summary}}</p>
+  </div>
+
+  <div class="card">
+    <h3>Email Draft</h3>
+    <p>{{email}}</p>
+  </div>
+
+  {% endif %}
+
+</div>
+
+</body>
+</html>
